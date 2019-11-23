@@ -1,0 +1,5 @@
+C:\Users\moham\source\repos\Encryption\Encryption\bin\Release\Encryption.dll
+C:\Users\moham\source\repos\Encryption\Encryption\bin\Release\Encryption.pdb
+C:\Users\moham\source\repos\Encryption\Encryption\obj\Release\Encryption.csproj.CoreCompileInputs.cache
+C:\Users\moham\source\repos\Encryption\Encryption\obj\Release\Encryption.dll
+C:\Users\moham\source\repos\Encryption\Encryption\obj\Release\Encryption.pdb
