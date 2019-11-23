@@ -55,6 +55,7 @@ namespace Store
                 error.InnerText = "Invalid username or password";
                 return;
             }
+            Response.Cookies.Add(Cookie.setCookie(new User(name, pass)));
             Response.Redirect("~/Member.aspx");
         }
     }
