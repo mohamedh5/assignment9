@@ -16,7 +16,13 @@ namespace Store
             if (cookie == null)
                 return;
             User user = Cookie.getUsetFromCookie(cookie);
-            if(user.isMember)
+            bool authanticated = authanticate(user.name, user.pass);
+            if (!authanticated)
+            {
+                Response.Cookies.Remove("Auth");
+                return;
+            }
+            if (user.isMember)
                 Response.Redirect("~/Member.aspx");
             else
                 Response.Redirect("~/Staff.aspx");
@@ -33,6 +39,19 @@ namespace Store
                 return;
             }
             pass = Encryption.EncryptionDecryption.encrypt(pass);
+
+            bool authanticated = authanticate(name, pass);
+            if (!authanticated)
+            {
+                error.InnerText = "Invalid username or password";
+                return;
+            }
+            Response.Cookies.Add(Cookie.setCookie(new User(name, pass)));
+            Response.Redirect("~/Member.aspx");
+        }
+
+        private bool authanticate(string name, string pass)
+        {
             string userData = HttpContext.Current.Server.MapPath("~/App_Data/Member.xml");
             bool found = false;
             XDocument xdoc = XDocument.Load(userData);
@@ -49,14 +68,7 @@ namespace Store
                     }
                 }
             }
-
-            if (!found)
-            {
-                error.InnerText = "Invalid username or password";
-                return;
-            }
-            Response.Cookies.Add(Cookie.setCookie(new User(name, pass)));
-            Response.Redirect("~/Member.aspx");
+            return found;
         }
     }
 }
